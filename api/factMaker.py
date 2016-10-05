@@ -80,11 +80,10 @@ def merge_sentences(primary, secondary):
     return ' '.join(joined_sentence)
 
 
-if __name__ == '__main__':
-    primary_page = 'http://en.wikipedia.org/wiki/%s' % sys.argv[1] if len(sys.argv) >= 2 else \
-                   'http://en.wikipedia.org/wiki/Special:Random'
-    secondary_page = 'http://en.wikipedia.org/wiki/%s' % sys.argv[2] if len(sys.argv) >= 3 else \
-                     'http://en.wikipedia.org/wiki/Special:Random'
+def fact_join(word1=None, word2=None):
+    random_url = 'http://en.wikipedia.org/wiki/Special:Random'
+    primary_page = 'http://en.wikipedia.org/wiki/%s' % word1 if word1 else random_url
+    secondary_page = 'http://en.wikipedia.org/wiki/%s' % word2 if word2 else random_url
 
     content = [get_page(primary_page), get_page(secondary_page)]
     for item in content:
@@ -96,6 +95,8 @@ if __name__ == '__main__':
 
     # display the results
     print('%s + %s' % (content[0]['topic'], content[1]['topic']))
+
+    article = ''
 
     for fact in facts:
         fact = re.sub(r' \.', '.', fact)
@@ -111,5 +112,12 @@ if __name__ == '__main__':
         if topic in fact:
             fact = re.sub(topic, hashtag, fact)
 
-        print(fact)
+        article += fact + '\n'
+
+    result = {
+        'topic1': content[0]['topic'],
+        'topic2': content[1]['topic'],
+        'article': article
+    }
+    return result
 
