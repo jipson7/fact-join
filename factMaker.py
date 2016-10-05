@@ -14,7 +14,7 @@ def get_page(page=None):
     else:
         r = requests.get('http://en.wikipedia.org/wiki/Special:Random')
 
-    soup = BeautifulSoup(r.text)
+    soup = BeautifulSoup(r.text, "html.parser")
 
     page_topic = soup.find('h1').text
     page_content = soup.find('div', {'id': 'mw-content-text'})
@@ -95,7 +95,7 @@ if __name__ == '__main__':
         facts.append(merge_sentences(content[0]['tagged'].pop(0), content[1]['tagged'].pop(0)))
 
     # display the results
-    print '%s + %s' % (content[0]['topic'], content[1]['topic'])
+    print('%s + %s' % (content[0]['topic'], content[1]['topic']))
 
     for fact in facts:
         fact = re.sub(r' \.', '.', fact)
@@ -111,5 +111,5 @@ if __name__ == '__main__':
         if topic in fact:
             fact = re.sub(topic, hashtag, fact)
 
-        print fact
+        print(fact)
 
