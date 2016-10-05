@@ -1,8 +1,8 @@
 # fact-join
 
-Update from original project to deploy as a flask server.
+##General
 
-A simple script that takes two Wikipedia pages from user input or at random, and then merges them to create new facts.
+Script that takes two Wikipedia pages from user input or at random, and then merges them to create new facts.
 
 Atlantis + San Francisco
 
@@ -15,3 +15,41 @@ Peacock spiders + the sun
 Computer programming + witchcraft
 
 `In general, good programming derives from Old Testament laws against witchcraft, and entered the mainstream when belief in witchcraft gained Church approval in the Early Modern Period.`
+
+##Changes
+
+Updated from original project to deploy as a flask server.
+
+Also upgraded to python3
+
+
+##Usage
+
+To install deps, create env and run:
+
+```
+pip install -r requirements.txt
+
+```
+
+To run:
+
+```
+./manage.py runserver
+
+```
+
+To Use:
+
+```
+http://localhost:5000/word1/word2
+
+```
+
+Where if word2 or word1 are ommited they are replaced with random articles.
+
+###Notes:
+
+Simple cacheing is implemented at a default of 1 hour, this can be changed in the config
+
+
